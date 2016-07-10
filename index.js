@@ -11,7 +11,7 @@ module.exports = function flattenObjectDeep (o = {}, delimiter) {
   ) delimiter = '_'
 
   function recur (result, val, key) {
-    if (!isPlainObject(val)) {
+    if (!isPlainObject(val) || isEmpty(val)) {
       result[key] = val
       return
     }

@@ -12,7 +12,7 @@ const o2 = {
     d: 2,
     e: {
       f: {
-        g: 3,
+        g: {},
         h: 4
       },
       i: 5
@@ -39,7 +39,7 @@ test('should flatten object deep', t => {
   const expected = {
     a: 1,
     c_d: 2,
-    c_e_f_g: 3,
+    c_e_f_g: {},
     c_e_f_h: 4,
     c_e_i: 5,
     j_k: 6,
