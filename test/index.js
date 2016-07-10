@@ -1,5 +1,28 @@
 const test = require('ava')
-const flattenObjectDeep = require('../src')
+const flattenObjectDeep = require('..')
+
+const o1 = {
+  a: {
+    b: 3
+  }
+}
+const o2 = {
+  a: 1,
+  c: {
+    d: 2,
+    e: {
+      f: {
+        g: 3,
+        h: 4
+      },
+      i: 5
+    }
+  },
+  j: {
+    k: 6,
+    l: 7
+  }
+}
 
 test('should return empty POJO if undefined is 1st arg', t => {
   t.deepEqual(flattenObjectDeep(), {})
@@ -13,23 +36,6 @@ test('should return first arg if passed anything other than a POJO', t => {
 })
 
 test('should flatten object deep', t => {
-  const o = {
-    a: 1,
-    c: {
-      d: 2,
-      e: {
-        f: {
-          g: 3,
-          h: 4
-        },
-        i: 5
-      }
-    },
-    j: {
-      k: 6,
-      l: 7
-    }
-  }
   const expected = {
     a: 1,
     c_d: 2,
@@ -39,32 +45,20 @@ test('should flatten object deep', t => {
     j_k: 6,
     j_l: 7
   }
-
-  t.deepEqual(flattenObjectDeep(o), expected)
+  t.deepEqual(flattenObjectDeep(o2), expected)
 })
 
-test('passing the delimiter param will separate keys by the delimiter', t => {
-  const o = {
-    a: {
-      b: 3
-    }
-  }
-  const expected = {
-    a$b: 3
-  }
-
-  t.deepEqual(flattenObjectDeep(o, '$'), expected)
+test('passing a delimiter of type string will separate keys by the delimiter', t => {
+  const expected = { a$b: 3 }
+  t.deepEqual(flattenObjectDeep(o1, '$'), expected)
 })
 
-test('if the delimiter passed is not of type string, the default _ will be used', t => {
-  const o = {
-    a: {
-      b: 3
-    }
-  }
-  const expected = {
-    a_b: 3
-  }
+test('passing a delimiter of type number will separate keys by the delimiter', t => {
+  const expected = { a100b: 3 }
+  t.deepEqual(flattenObjectDeep(o1, 100), expected)
+})
 
-  t.deepEqual(flattenObjectDeep(o, 3), expected)
+test('if the delimiter passed is not of type string or number, the default _ will be used', t => {
+  const expected = { a_b: 3 }
+  t.deepEqual(flattenObjectDeep(o1, {}), expected)
 })

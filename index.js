@@ -1,12 +1,13 @@
-const isPlainObject = require('lodash/isPlainObject')
-const isEmpty = require('lodash/isEmpty')
-const transform = require('lodash/transform')
-const isString = require('lodash/isString')
-const each = require('lodash/each')
+import isPlainObject from 'lodash/isPlainObject'
+import isEmpty from 'lodash/isEmpty'
+import transform from 'lodash/transform'
+import isString from 'lodash/isString'
+import isNumber from 'lodash/isNumber'
+import each from 'lodash/each'
 
 module.exports = function flattenObjectDeep (o = {}, delimiter) {
   if (!isPlainObject(o) || isEmpty(o)) return o
-  delimiter = delimiter != null && isString(delimiter)
+  delimiter = delimiter != null && isString(delimiter) || isNumber(delimiter)
     ? delimiter
     : '_'
 
