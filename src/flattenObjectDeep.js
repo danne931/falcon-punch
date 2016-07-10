@@ -1,23 +1,29 @@
-const _ = require('lodash')
+const isPlainObject = require('lodash/isPlainObject')
+const isEmpty = require('lodash/isEmpty')
+const transform = require('lodash/transform')
+const isString = require('lodash/isString')
+const each = require('lodash/each')
 
-function flattenObjectDeep (o = {}, separator = '_') {
-  if (_.isEmpty(o)) return o
+module.exports = function flattenObjectDeep (o = {}, delimiter) {
+  if (!isPlainObject(o) || isEmpty(o)) return o
+  delimiter = delimiter != null && isString(delimiter)
+    ? delimiter
+    : '_'
 
   function recur (result, val, key) {
-    if (!_.isPlainObject(val)) return
+    if (!isPlainObject(val)) {
+      result[key] = val
+      return
+    }
 
-    _.each(val, (nestedVal, nestedKey) => {
-      if (_.isPlainObject(nestedVal)) {
-        recur(result, nestedVal, `${key}${separator}${nestedKey}`)
+    each(val, (nestedVal, nestedKey) => {
+      if (isPlainObject(nestedVal)) {
+        recur(result, nestedVal, `${key}${delimiter}${nestedKey}`)
       } else {
-        result[`${key}${separator}${nestedKey}`] = nestedVal
+        result[`${key}${delimiter}${nestedKey}`] = nestedVal
       }
     })
   }
 
-  return _.transform(o, recur)
-}
-
-module.exports = {
-  flattenObjectDeep
+  return transform(o, recur)
 }
