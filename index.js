@@ -1,15 +1,14 @@
 import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import transform from 'lodash/transform'
-import isString from 'lodash/isString'
-import isNumber from 'lodash/isNumber'
 import each from 'lodash/each'
 
 module.exports = function flattenObjectDeep (o = {}, delimiter) {
   if (!isPlainObject(o) || isEmpty(o)) return o
-  delimiter = delimiter != null && isString(delimiter) || isNumber(delimiter)
-    ? delimiter
-    : '_'
+  if (delimiter == null ||
+    typeof delimiter !== 'string' &&
+    typeof delimiter !== 'number'
+  ) delimiter = '_'
 
   function recur (result, val, key) {
     if (!isPlainObject(val)) {
