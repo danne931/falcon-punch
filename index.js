@@ -1,7 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import transform from 'lodash/transform'
-import each from 'lodash/each'
 
 module.exports = function flattenObjectDeep (o = {}, delimiter) {
   if (!isPlainObject(o) || isEmpty(o)) return o
@@ -16,7 +15,8 @@ module.exports = function flattenObjectDeep (o = {}, delimiter) {
       return
     }
 
-    each(val, (nestedVal, nestedKey) => {
+    Object.keys(val).forEach(nestedKey => {
+      const nestedVal = val[nestedKey]
       if (isPlainObject(nestedVal)) {
         recur(result, nestedVal, `${key}${delimiter}${nestedKey}`)
       } else {
