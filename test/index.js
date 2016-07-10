@@ -1,5 +1,5 @@
-const test = require('ava')
-const flattenObjectDeep = require('..')
+import test from 'ava'
+import flattenObjectDeep from '..'
 
 const o1 = {
   a: {
