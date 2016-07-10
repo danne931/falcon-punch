@@ -1,5 +1,5 @@
 const test = require('ava')
-const flattenObjectDeep = require('../src/flattenObjectDeep')
+const flattenObjectDeep = require('../src')
 
 test('should return empty POJO if undefined is 1st arg', t => {
   t.deepEqual(flattenObjectDeep(), {})
