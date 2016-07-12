@@ -1,7 +1,7 @@
 {
   "name": "flatten-object-deep",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "flatten your POJO",
   "main": "lib/index.js",
   "dependencies": {
     "lodash": "^4.13.1"
@@ -36,7 +36,14 @@
   },
   "author": "Daniel Eisenbarger <danieleisenbarger@gmail.com> (https://github.com/danne931)",
   "license": "MIT",
-  "bugs": "https://github.com/danne931/flatten-object-deep/issues",
+  "bugs": {
+    "url": "https://github.com/danne931/flatten-object-deep/issues"
+  },
+  "keywords": [
+    "flatten",
+    "plain old javascript object",
+    "pojo"
+  ],
   "standard": {
     "parser": "babel-eslint"
   },
