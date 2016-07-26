@@ -75,5 +75,5 @@ const arr = [
   '1.0.1.0': {}
 }
 */
-flattenObjectDeep(arr, { delimiter: '.' })
+falconPunch(arr, { delimiter: '.' })
 ```
