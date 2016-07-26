@@ -36,7 +36,7 @@ const recurFlatten = ({
   }
 }
 
-export default function flattenObjectDeep (o = {}, opts = {}) {
+export default function falconPunch (o = {}, opts = {}) {
   const {
     maxDepth,
     delimiter = '_'
