@@ -11,7 +11,7 @@ const recurFlatten = ({
   delimiter,
   maxDepth
 }) => {
-  let currDepth = 1
+  let currDepth = 0
 
   return function recur (acc, val, key) {
     const keys = getKeys(val)

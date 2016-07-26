@@ -1,6 +1,6 @@
 # falcon-punch
 
-Flatten your POJOs/Arrays by a delimiter
+Flatten your objects & arrays by a delimiter
 
 ![](http://i.giphy.com/y4dfjHr6NsjsY.gif)
 
@@ -34,11 +34,11 @@ const o = {
   }
 }
 // { a: 1, 'b_c': 'falcon', 'b_d_e': 'punch' }
-falconPunch(o)  
+falconPunch(o)
 
 // Specify opts: delimiter & maxDepth
 // { a: 1, 'b???c': 'falcon', 'b???d': { e: 'punch' } }
-falconPunch(o, { delimiter: '???', maxDepth: 2 })
+falconPunch(o, { delimiter: '???', maxDepth: 1 })
 
 // go crazy
 const arr = [
@@ -63,7 +63,8 @@ const arr = [
   },
   [[1, [{}]]]
 ]
-/* {
+/*
+{
   '0.a.0.0.b': 0,
   '0.a.0.0.c': 1,
   '0.a.0.1': 10,

@@ -8,6 +8,7 @@ const o1 = {
 }
 const o2 = {
   a: 1,
+  b: () => 3,
   c: {
     d: 2,
     e: {
@@ -50,16 +51,42 @@ test('should return empty POJO if undefined is 1st arg', t => {
   t.deepEqual(falconPunch(), {})
 })
 
-test('should return first arg if passed anything other than a POJO or Array', t => {
+test('should return first arg if passed anything other than an object or array', t => {
   t.is(falconPunch(null), null)
   t.is(falconPunch(1), 1)
   t.is(falconPunch('string'), 'string')
+  const date = new Date()
+  date.a = {
+    b: 1,
+    c: {
+      d: []
+    }
+  }
+  t.deepEqual(falconPunch(date), date)
+})
+
+test('observe empty array/object + depth:1 array/object behavior', t => {
+  const o = { a: 1, b: 2 }
+  const arr = [1, 2, 3]
+
   t.deepEqual(falconPunch({}), {})
+  t.deepEqual(falconPunch([]), [])
+
+  t.deepEqual(falconPunch(o), o)
+  t.deepEqual(
+    {
+      0: arr[0],
+      1: arr[1],
+      2: arr[2]
+    },
+    falconPunch(arr)
+  )
 })
 
 test('should flatten object deep', t => {
   const expected = {
     a: o2.a,
+    b: o2.b,
     c_d: o2.c.d,
     c_e_f_g: o2.c.e.f.g,
     c_e_f_h: o2.c.e.f.h,
@@ -91,33 +118,32 @@ test('use default delimiter _ if delimiter opt is undefined', t => {
   t.deepEqual(falconPunch(o1), expected)
 })
 
-test('passing a delimiter of type string will separate keys by the delimiter', t => {
-  const expected = { a$b: o1.a.b }
-  const opts = { delimiter: '$' }
+test('passing a delimiter will separate keys by the delimiter', t => {
+  let expected = { a$b: o1.a.b }
+  let opts = { delimiter: '$' }
   t.deepEqual(falconPunch(o1, opts), expected)
-})
 
-test('passing a delimiter of type number will separate keys by the delimiter', t => {
-  const expected = { a100b: o1.a.b }
-  const opts = { delimiter: 100 }
+  expected = { a100b: o1.a.b }
+  opts = { delimiter: 100 }
+  t.deepEqual(falconPunch(o1, opts), expected)
+
+  expected = { anullb: o1.a.b }
+  opts = { delimiter: null }
+  t.deepEqual(falconPunch(o1, opts), expected)
+
+  const date = new Date()
+  expected = { [`a${date}b`]: o1.a.b }
+  opts = { delimiter: date }
   t.deepEqual(falconPunch(o1, opts), expected)
 })
 
 test('allow consumer to specify maxDepth', t => {
   t.deepEqual(
     {
-      0: o3[0],
-      1: o3[1]
-    },
-    falconPunch(o3, { maxDepth: 1 })
-  )
-
-  t.deepEqual(
-    {
       '0_a': o3[0].a,
       1: o3[1]
     },
-    falconPunch(o3, { maxDepth: 2 })
+    falconPunch(o3, { maxDepth: 1 })
   )
 
   t.deepEqual(
@@ -126,7 +152,7 @@ test('allow consumer to specify maxDepth', t => {
       '0_a_1': o3[0].a[1],
       1: o3[1]
     },
-    falconPunch(o3, { maxDepth: 3 })
+    falconPunch(o3, { maxDepth: 2 })
   )
 
   t.deepEqual(
@@ -136,7 +162,7 @@ test('allow consumer to specify maxDepth', t => {
       '0_a_1': o3[0].a[1],
       1: o3[1]
     },
-    falconPunch(o3, { maxDepth: 4 })
+    falconPunch(o3, { maxDepth: 3 })
   )
 
   t.deepEqual(
@@ -147,33 +173,30 @@ test('allow consumer to specify maxDepth', t => {
       '0_a_1': o3[0].a[1],
       1: o3[1]
     },
-    falconPunch(o3, { maxDepth: 5 })
+    falconPunch(o3, { maxDepth: 4 })
   )
 
   t.deepEqual(
-    o2,
+    {
+      a: o2.a,
+      b: o2.b,
+      c_d: o2.c.d,
+      c_e: o2.c.e,
+      j: o2.j
+    },
     falconPunch(o2, { maxDepth: 1 })
   )
 
   t.deepEqual(
     {
       a: o2.a,
-      c_d: o2.c.d,
-      c_e: o2.c.e,
-      j: o2.j
-    },
-    falconPunch(o2, { maxDepth: 2 })
-  )
-
-  t.deepEqual(
-    {
-      a: o2.a,
+      b: o2.b,
       c_d: o2.c.d,
       c_e_f: o2.c.e.f,
       c_e_i: o2.c.e.i,
       j: o2.j
     },
-    falconPunch(o2, { maxDepth: 3 })
+    falconPunch(o2, { maxDepth: 2 })
   )
 })
 
