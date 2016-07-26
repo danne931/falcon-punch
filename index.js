@@ -1,30 +1,42 @@
-import isPOJO from 'lodash/isPlainObject'
+const getType = val => Object.prototype.toString.call(val)
 
-const isEmptyPOJO = o => Object.keys(o).length === 0
+const getKeys = props => {
+  const type = getType(props)
+  return type === '[object Object]' || type === '[object Array]'
+    ? Object.keys(props)
+    : []
+}
+
 const recurFlatten = delimiter => function recur (acc, val, key) {
-  if (!isPOJO(val) || isEmptyPOJO(val)) {
+  const keys = getKeys(val)
+  if (keys.length === 0) {
     acc[key] = val
+    return
   }
 
-  Object.keys(val).forEach(nestedKey => {
+  keys.forEach(nestedKey => {
     const nestedVal = val[nestedKey]
-    if (isPOJO(nestedVal)) {
-      recur(acc, nestedVal, `${key}${delimiter}${nestedKey}`)
+    const nestedKeys = getKeys(nestedVal)
+    const nextKey = key + delimiter + nestedKey
+
+    if (nestedKeys.length > 0) {
+      recur(acc, nestedVal, nextKey)
     } else {
-      acc[`${key}${delimiter}${nestedKey}`] = nestedVal
+      acc[nextKey] = nestedVal
     }
   })
 }
 
 export default function flattenObjectDeep (o = {}, delimiter) {
-  if (!isPOJO(o) || isEmptyPOJO(o)) return o
+  const keys = getKeys(o)
+  if (keys.length === 0) return o
   if (delimiter == null ||
     typeof delimiter !== 'string' &&
     typeof delimiter !== 'number'
   ) delimiter = '_'
 
   const reducer = recurFlatten(delimiter)
-  return Object.keys(o).reduce((acc, val) => {
+  return keys.reduce((acc, val) => {
     reducer(acc, o[val], val)
     return acc
   }, {})

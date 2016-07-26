@@ -12,7 +12,7 @@ var config = {
     ]
   },
   output: {
-    library: 'timeout',
+    library: 'flattenObjectDeep',
     libraryTarget: 'umd'
   },
   plugins: []

@@ -1,5 +1,5 @@
 import test from 'ava'
-import flattenObjectDeep from '..'
+import flattenObjectDeep from '../index'
 
 const o1 = {
   a: {
@@ -29,9 +29,9 @@ test('should return empty POJO if undefined is 1st arg', t => {
 })
 
 test('should return first arg if passed anything other than a POJO', t => {
-  t.deepEqual(flattenObjectDeep(null), null)
-  t.deepEqual(flattenObjectDeep(1), 1)
-  t.deepEqual(flattenObjectDeep('string'), 'string')
+  t.is(flattenObjectDeep(null), null)
+  t.is(flattenObjectDeep(1), 1)
+  t.is(flattenObjectDeep('string'), 'string')
   t.deepEqual(flattenObjectDeep({}), {})
 })
 
