@@ -17,7 +17,7 @@ const recurFlatten = ({
     const keys = getKeys(val)
     if (keys.length === 0 || currDepth === maxDepth) {
       acc[key] = val
-      return
+      return acc
     }
 
     currDepth += 1
@@ -33,6 +33,8 @@ const recurFlatten = ({
         acc[nextKey] = nestedVal
       }
     })
+
+    return acc
   }
 }
 
@@ -45,8 +47,5 @@ export default function falconPunch (o = {}, opts = {}) {
   if (maxDepth === 0 || keys.length === 0) return o
 
   const reducer = recurFlatten({ delimiter, maxDepth })
-  return keys.reduce((acc, val) => {
-    reducer(acc, o[val], val)
-    return acc
-  }, {})
+  return keys.reduce((acc, val) => reducer(acc, o[val], val), {})
 }

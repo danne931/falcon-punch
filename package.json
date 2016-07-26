@@ -48,7 +48,9 @@
     "array",
     "flatten object",
     "flatten array",
-    "falcon punch"
+    "falcon punch",
+    "nested object",
+    "flatten deep"
   ],
   "standard": {
     "parser": "babel-eslint"
