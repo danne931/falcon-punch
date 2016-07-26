@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "4"
+  - "node"
+script:
+  - npm run check
+  - npm run build

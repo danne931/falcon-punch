@@ -1,8 +1,13 @@
 {
   "name": "falcon-punch",
   "version": "0.0.1",
-  "description": "flatten your POJO",
+  "description": "Flatten your POJOs & Arrays by a delimiter",
   "main": "lib/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "index.js"
+  ],
   "dependencies": {},
   "devDependencies": {
     "ava": "^0.15.2",
@@ -22,7 +27,7 @@
     "clean": "rimraf dist lib",
     "test": "ava",
     "check": "standard && npm test",
-    "build:commonjs": "cross-env BABEL_ENV=commonjs babel index.js --out-dir lib",
+    "build:commonjs": "babel index.js --out-dir lib",
     "build:umd": "cross-env NODE_ENV=development webpack --display-modules index.js dist/falcon-punch.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack --display-modules index.js dist/falcon-punch.min.js",
     "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:umd:min",
@@ -30,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "repo": "https://github.com/danne931/falcon-punch.git"
+    "url": "https://github.com/danne931/falcon-punch.git"
   },
   "author": "Daniel Eisenbarger <danieleisenbarger@gmail.com> (https://github.com/danne931)",
   "license": "MIT",
