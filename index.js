@@ -37,15 +37,12 @@ const recurFlatten = ({
 }
 
 export default function flattenObjectDeep (o = {}, opts = {}) {
-  let { delimiter } = opts
-  const { maxDepth } = opts
+  const {
+    maxDepth,
+    delimiter = '_'
+  } = opts
   const keys = getKeys(o)
-
   if (maxDepth === 0 || keys.length === 0) return o
-  if (delimiter == null ||
-    typeof delimiter !== 'string' &&
-    typeof delimiter !== 'number'
-  ) delimiter = '_'
 
   const reducer = recurFlatten({ delimiter, maxDepth })
   return keys.reduce((acc, val) => {
