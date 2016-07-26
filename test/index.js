@@ -101,3 +101,58 @@ test('if the delimiter passed is not of type string or number, the default _ wil
   const opts = { delimiter: new Date() }
   t.deepEqual(flattenObjectDeep(o1, opts), expected)
 })
+
+test('allow consumer to specify maxDepth', t => {
+  t.deepEqual(
+    {
+      0: o3[0],
+      1: o3[1]
+    },
+    flattenObjectDeep(o3, { maxDepth: 1 })
+  )
+
+  t.deepEqual(
+    {
+      '0_a': o3[0].a,
+      1: o3[1]
+    },
+    flattenObjectDeep(o3, { maxDepth: 2 })
+  )
+
+  t.deepEqual(
+    {
+      '0_a_0': o3[0].a[0],
+      '0_a_1': o3[0].a[1],
+      1: o3[1]
+    },
+    flattenObjectDeep(o3, { maxDepth: 3 })
+  )
+
+  t.deepEqual(
+    {
+      '0_a_0_0': o3[0].a[0][0],
+      '0_a_0_1': o3[0].a[0][1],
+      '0_a_1': o3[0].a[1],
+      1: o3[1]
+    },
+    flattenObjectDeep(o3, { maxDepth: 4 })
+  )
+
+  t.deepEqual(
+    {
+      '0_a_0_0_b': o3[0].a[0][0].b,
+      '0_a_0_0_c': o3[0].a[0][0].c,
+      '0_a_0_1': o3[0].a[0][1],
+      '0_a_1': o3[0].a[1],
+      1: o3[1]
+    },
+    flattenObjectDeep(o3, { maxDepth: 5 })
+  )
+})
+
+test('return props passed if consumer specifies maxDepth: 0', t => {
+  t.deepEqual(
+    o3,
+    flattenObjectDeep(o3, { maxDepth: 0 })
+  )
+})
