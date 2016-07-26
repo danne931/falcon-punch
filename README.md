@@ -1,6 +1,6 @@
 # falcon-punch
 
-Flatten your objects & arrays by a delimiter
+Flatten your objects and arrays by a delimiter
 
 ![](http://i.giphy.com/y4dfjHr6NsjsY.gif)
 
