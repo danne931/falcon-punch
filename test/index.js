@@ -80,20 +80,24 @@ test('flatten arrays', t => {
     '1.0.0': 1,
     '1.0.1.0': {}
   }
-  t.deepEqual(flattenObjectDeep(o3, '.'), expected)
+  const opts = { delimiter: '.' }
+  t.deepEqual(flattenObjectDeep(o3, opts), expected)
 })
 
 test('passing a delimiter of type string will separate keys by the delimiter', t => {
   const expected = { a$b: 3 }
-  t.deepEqual(flattenObjectDeep(o1, '$'), expected)
+  const opts = { delimiter: '$' }
+  t.deepEqual(flattenObjectDeep(o1, opts), expected)
 })
 
 test('passing a delimiter of type number will separate keys by the delimiter', t => {
   const expected = { a100b: 3 }
-  t.deepEqual(flattenObjectDeep(o1, 100), expected)
+  const opts = { delimiter: 100 }
+  t.deepEqual(flattenObjectDeep(o1, opts), expected)
 })
 
 test('if the delimiter passed is not of type string or number, the default _ will be used', t => {
   const expected = { a_b: 3 }
-  t.deepEqual(flattenObjectDeep(o1, {}), expected)
+  const opts = { delimiter: new Date() }
+  t.deepEqual(flattenObjectDeep(o1, opts), expected)
 })

@@ -27,8 +27,9 @@ const recurFlatten = delimiter => function recur (acc, val, key) {
   })
 }
 
-export default function flattenObjectDeep (o = {}, delimiter) {
+export default function flattenObjectDeep (o = {}, opts = {}) {
   const keys = getKeys(o)
+  let { delimiter } = opts
   if (keys.length === 0) return o
   if (delimiter == null ||
     typeof delimiter !== 'string' &&
