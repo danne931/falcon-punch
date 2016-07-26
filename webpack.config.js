@@ -12,7 +12,7 @@ var config = {
     ]
   },
   output: {
-    library: 'flattenObjectDeep',
+    library: 'falconPunch',
     libraryTarget: 'umd'
   },
   plugins: []

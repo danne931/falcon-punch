@@ -1,5 +1,5 @@
 {
-  "name": "flatten-object-deep",
+  "name": "falcon-punch",
   "version": "0.0.1",
   "description": "flatten your POJO",
   "main": "lib/index.js",
@@ -23,24 +23,25 @@
     "test": "ava",
     "check": "standard && npm test",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel index.js --out-dir lib",
-    "build:umd": "cross-env NODE_ENV=development webpack --display-modules index.js dist/flatten-object-deep.js",
-    "build:umd:min": "cross-env NODE_ENV=production webpack --display-modules index.js dist/flatten-object-deep.min.js",
+    "build:umd": "cross-env NODE_ENV=development webpack --display-modules index.js dist/falcon-punch.js",
+    "build:umd:min": "cross-env NODE_ENV=production webpack --display-modules index.js dist/falcon-punch.min.js",
     "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:umd:min",
     "prepublish": "npm run check && npm run build"
   },
   "repository": {
     "type": "git",
-    "repo": "https://github.com/danne931/flatten-object-deep.git"
+    "repo": "https://github.com/danne931/falcon-punch.git"
   },
   "author": "Daniel Eisenbarger <danieleisenbarger@gmail.com> (https://github.com/danne931)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/danne931/flatten-object-deep/issues"
+    "url": "https://github.com/danne931/falcon-punch/issues"
   },
   "keywords": [
     "flatten",
     "plain old javascript object",
-    "pojo"
+    "pojo",
+    "falcon punch"
   ],
   "standard": {
     "parser": "babel-eslint"
