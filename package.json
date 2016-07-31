@@ -17,8 +17,10 @@
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.9.0",
+    "coveralls": "^2.11.12",
     "cross-env": "^1.0.8",
     "ghooks": "^1.3.2",
+    "nyc": "^7.1.0",
     "rimraf": "^2.5.3",
     "standard": "^7.1.2",
     "webpack": "^1.13.1"
@@ -27,6 +29,8 @@
     "clean": "rimraf dist lib",
     "test": "ava",
     "check": "standard && npm test",
+    "coverage": "nyc npm test",
+    "report-coverage": "cat coverage/lcov.info | coveralls",
     "build:commonjs": "babel index.js --out-dir lib",
     "build:umd": "cross-env NODE_ENV=development webpack --display-modules index.js dist/falcon-punch.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack --display-modules index.js dist/falcon-punch.min.js",
@@ -64,6 +68,17 @@
     "require": [
       "babel-core/register"
     ]
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "check-coverage": true
   },
   "config": {
     "ghooks": {

@@ -5,6 +5,7 @@ Flatten your objects and arrays by a delimiter
 ![](http://i.giphy.com/y4dfjHr6NsjsY.gif)
 
 [![Build Status](https://travis-ci.org/danne931/falcon-punch.svg?branch=master)](https://travis-ci.org/danne931/falcon-punch)
+[![Coverage Status](https://coveralls.io/repos/github/danne931/falcon-punch/badge.svg)](https://coveralls.io/github/danne931/falcon-punch)
 [![npm version](https://img.shields.io/npm/v/falcon-punch.svg?style=flat-square)](https://www.npmjs.com/package/falcon-punch)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 ![](https://img.shields.io/badge/license-MIT-blue.svg)
