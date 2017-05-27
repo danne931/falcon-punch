@@ -1,6 +1,6 @@
 {
   "name": "falcon-punch",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Flatten your objects and arrays by a delimiter",
   "main": "lib/index.js",
   "files": [
