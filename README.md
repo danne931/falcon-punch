@@ -17,8 +17,8 @@ $ npm install --save falcon-punch
 ```
 
 Not using Node or a module bundler? Use a UMD build via the `<script>` tag.
-- [https://npmcdn.com/falcon-punch/dist/falcon-punch.js](https://npmcdn.com/falcon-punch/dist/falcon-punch.js)
-- [https://npmcdn.com/falcon-punch/dist/falcon-punch.min.js](https://npmcdn.com/falcon-punch/dist/falcon-punch.min.js)
+- [https://unpkg.com/falcon-punch/dist/falcon-punch.js](https://unpkg.com/falcon-punch/dist/falcon-punch.js)
+- [https://unpkg.com/falcon-punch/dist/falcon-punch.min.js](https://unpkg.com/falcon-punch/dist/falcon-punch.min.js)
 
 ## Usage
 
