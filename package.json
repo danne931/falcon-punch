@@ -19,10 +19,10 @@
     "babel-preset-es2015": "^6.9.0",
     "coveralls": "^2.11.12",
     "cross-env": "^1.0.8",
-    "ghooks": "^1.3.2",
+    "husky": "^0.13.3",
     "nyc": "^7.1.0",
     "rimraf": "^2.5.3",
-    "standard": "^7.1.2",
+    "standard": "^10.0.2",
     "webpack": "^1.13.1"
   },
   "scripts": {
@@ -35,7 +35,9 @@
     "build:umd": "cross-env NODE_ENV=development webpack --display-modules index.js dist/falcon-punch.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack --display-modules index.js dist/falcon-punch.min.js",
     "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:umd:min",
-    "prepublish": "npm run check && npm run build"
+    "prepublish": "npm run check && npm run build",
+    "precommit": "standard",
+    "prepush": "npm test"
   },
   "repository": {
     "type": "git",
@@ -79,11 +81,5 @@
     "functions": 100,
     "branches": 100,
     "check-coverage": true
-  },
-  "config": {
-    "ghooks": {
-      "pre-commit": "standard",
-      "pre-push": "npm test"
-    }
   }
 }
